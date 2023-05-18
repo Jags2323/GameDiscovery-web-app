@@ -10,15 +10,17 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install     # or yarn install
 
+RUN npm install vite --save-dev
+
 # Copy the rest of the application code
 COPY . .
 
 # Build the React app
-RUN npm run build   # or yarn build
+RUN npx vite build   # or yarn build
 
 # Serve the app with a static file server (optional)
 # If you plan to use a reverse proxy or a different server to serve the app, you can omit this line
-RUN npm install -g serve
+#RUN npm install -g serve
 
 # Set the command to run the app when the container starts
 CMD ["serve", "-s", "build", "-l", "3000"]
